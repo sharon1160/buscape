@@ -1,0 +1,27 @@
+#container-logo {
+  display: flex;
+  margin: -0.5rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  padding-left: 0.8rem;
+  padding-right: 0.4rem;
+  background-color: rgb(37, 35, 35);
+  box-shadow: 0 4px 2px -2px rgb(201, 200, 200);
+}
+
+#logo{
+  margin-left: 10px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  font-size: 2rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bolder;
+  color: floralwhite;
+}
+
+#word-input-form {
+  margin-left: 28rem;
+  margin-top: 1.7rem;
+  padding-bottom: 1.4rem;
+}
+
