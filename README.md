@@ -3,7 +3,7 @@
 ## Team 
 
 - Jerson Zuñiga Coayla
-- Victor Janampa Canahhuire
+- Victor Janampa Canahuire
 - Brayan Lipe Mamani
 - Franks Colque Zegarra
 - Sharon Rossely Chullunquia Rosas
