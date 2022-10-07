@@ -14,21 +14,16 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route("/")
-def home():
-    return render_template('index.html')
-
-
-def make_results(pid, n_coincidences, list_results):
+def make_results(pid, n_coincidences, page_rank, list_results):
     url = pages_ref.child(pid).get()
-    if url is not None:
-        list_results.append({'url': url, 'n_coincidences': n_coincidences})
+    list_results.append(
+        {'url': url, 'n_coincidences': n_coincidences, 'page_rank': page_rank})
 
 
-async def results(pid, n_workers, list_results, n_coincidences, event_loop):
+async def results(pid, n_workers, list_results, n_coincidences, page_rank, event_loop):
     with concurrent.futures.ThreadPoolExecutor(max_workers=n_workers + 2) as executor:
         # print("Fetching: ", pid)
-        return await event_loop.run_in_executor(executor, make_results, pid, n_coincidences, list_results)
+        return await event_loop.run_in_executor(executor, make_results, pid, n_coincidences, page_rank, list_results)
 
 
 async def results_range(word, list_results, event_loop):
@@ -36,9 +31,17 @@ async def results_range(word, list_results, event_loop):
     page_ids = idx_ref.child(word).get()
     print("Page ids fetched", len(page_ids))
 
-    coroutines = [results(pid, len(page_ids), list_results,
-                          page_ids[pid], event_loop) for pid in page_ids]
+    # page rank
+    page_rank_ids = ranks_ref.get()
+
+    coroutines = [results(pid, len(page_ids), list_results, page_ids[pid],
+                          page_rank_ids[pid], event_loop) for pid in page_ids if pid in page_rank_ids]
     await asyncio.gather(*coroutines)
+
+
+@app.route("/")
+def home():
+    return render_template('index.html')
 
 
 @app.route("/search", methods=['POST'])
