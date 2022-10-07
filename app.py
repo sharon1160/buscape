@@ -39,6 +39,10 @@ async def results_range(word, list_results, event_loop):
     await asyncio.gather(*coroutines)
 
 
+def sort_by_pagerank(list_results):
+    return sorted(list_results, key=lambda d: d['page_rank'], reverse=True)
+
+
 @app.route("/")
 def home():
     return render_template('index.html')
@@ -60,6 +64,8 @@ def search():
         event_loop.close()
         print('Time elapsed:', (time.time() - t0), 'seconds')
     ###
+
+    list_results = sort_by_pagerank(list_results)
 
     return render_template('results.html', results_list=list_results, n_results=len(list_results), word=word)
 
