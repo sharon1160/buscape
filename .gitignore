@@ -1,3 +1,9 @@
+.venv/
 venv/
+
 credentials.json
+
 __pycache__/
+
+# IDE configurations
+.idea/
