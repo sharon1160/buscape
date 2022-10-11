@@ -2,7 +2,7 @@
 
 {% block content %}
 <p>Showing {{n_results}} results for the word: <b>"{{word}}"</b></p>
-  {% for dic in results_list %}
+  {% for dic in pagination_results %}
     <div class="card mx-5 my-4" style="width: 50rem;">
       <div class="card-body">
           <a href="https://{{dic['url']}}" target="_blank">{{dic['url']}}</a><br>
@@ -10,4 +10,9 @@
       </div>
     </div>
   {% endfor %}
+
+<div class="container">
+  {{pagination.links}}
+</div>
+
 {% endblock %}
