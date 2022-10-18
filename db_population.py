@@ -1,16 +1,15 @@
+from parsers import page_rank as prp, inv_index as iip
 from typing import Dict, List
-import uuid
 from firebase_admin import db
 from uuid import uuid3
 from tqdm import tqdm
+import uuid
 import json
-
-from parsers import page_rank as prp, inv_index as iip
-
-import app_init
+import db_init
 
 
-def poblate_pages_and_rank(pages: List, pages_ref: db.Reference, ranks_ref: db.Reference):
+def poblate_pages_and_rank(pages: List, pages_ref: db.Reference,
+                           ranks_ref: db.Reference):
     print('Poblating pages and ranks node')
     pages_dict = {}
     rank_dict = {}
@@ -25,10 +24,11 @@ def poblate_pages_and_rank(pages: List, pages_ref: db.Reference, ranks_ref: db.R
     ranks_ref.update(rank_dict)
 
 
-def poblate_indexes(indexes: Dict, index_ref: db.Reference, pages_ref: db.Reference):
+def poblate_indexes(indexes: Dict, index_ref: db.Reference,
+                    pages_ref: db.Reference):
     existent_links = {}
-    counter=0
-    nextupload=10000
+    counter = 0
+    nextupload = 10000
     print('Poblating indexes')
     for word, links in tqdm(indexes.items()):
         existent_links[word] = {}
@@ -37,12 +37,12 @@ def poblate_indexes(indexes: Dict, index_ref: db.Reference, pages_ref: db.Refere
             page_id = str(page_id)
             link_ref = pages_ref.child(page_id)
             if link_ref is not None:
-                    existent_links[word][page_id] = links[link]
-        counter+=1
-        if counter == nextupload :
+                existent_links[word][page_id] = links[link]
+        counter += 1
+        if counter == nextupload:
             try:
                 index_ref.update(existent_links)
-                nextupload+=10000
+                nextupload += 10000
             except NameError:
                 print(NameError)
     try:

@@ -1,6 +1,6 @@
 # Busca.pe
 
-## Team 
+## Team
 
 - Jerson Zuñiga Coayla
 - Victor Janampa Canahuire
@@ -10,31 +10,30 @@
 
 ## 1. Create virtual environment
 
-* We create the virtual environment for our project.
+- We create the virtual environment for our project.
 
-  ``` 
-  python -m venv venv
-  ````
+  ```
+  python3 -m venv .venv
+  ```
 
-* We activate our virtual environment.
-
+- We activate our virtual environment.
 
   ```bash
-  source venv/bin/activate
-  ````
+  source .venv/bin/activate
+  ```
 
 ## 2. Install requirements
 
-* We install requirements using requirements.txt file.
+- We install requirements using requirements.txt file.
 
   ```bash
   pip install -r requirements.txt
-  ````
+  ```
 
 ## 3. Run
 
-* To run the application.
+- To run the application.
 
   ```bash
   python app.py
-  ````
+  ```

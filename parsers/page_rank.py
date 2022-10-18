@@ -1,4 +1,4 @@
-results_path = './data/resultpagerank.txt'
+results_path = '../output/pagerank.txt'
 
 
 def get_pages(res_file=None, withRank=False):

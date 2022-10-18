@@ -1,7 +1,4 @@
-from os import link
-
-
-results_path = './data/iiresults.txt'
+results_path = '../output/invertedindex.txt'
 
 
 def get_index(res_file=None):
@@ -13,8 +10,8 @@ def get_index(res_file=None):
         word, links = line.split('\t')
         inv_index[word] = {}
         out_links = links.strip().split('|')
-        for i in range(0, len(out_links)-1, 2):
-            inv_index[word][out_links[i]] = int(out_links[i+1])
+        for i in range(0, len(out_links) - 1, 2):
+            inv_index[word][out_links[i]] = int(out_links[i + 1])
     return inv_index
 
 

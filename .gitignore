@@ -1,9 +1,15 @@
+# virtual environments
 .venv/
 venv/
 
+# configs and private files
+.env
 credentials.json
 
+# results and cache
+indexes.json
 __pycache__/
 
 # IDE configurations
 .idea/
+.vscode/
